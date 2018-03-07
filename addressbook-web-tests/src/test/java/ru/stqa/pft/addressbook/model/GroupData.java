@@ -1,5 +1,10 @@
 package ru.stqa.pft.addressbook.model;
 
+/**
+ * Класс содержит информацию о группе
+ * @author Evgeniy
+ * @version 1.0.0
+ */
 public class GroupData {
     private final String name;
     private final String header;

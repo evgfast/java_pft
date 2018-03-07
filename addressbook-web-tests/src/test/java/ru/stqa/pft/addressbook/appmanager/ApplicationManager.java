@@ -4,6 +4,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Класс для управления приложением, управляет браузером и создает основные вспомогательные объекты
+ */
 public class ApplicationManager {
 
     ChromeDriver wd;
@@ -11,6 +14,7 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
+    private ContactHelper contactHelper;
 
 
     public void init() {
@@ -21,6 +25,7 @@ public class ApplicationManager {
         wd.get("http://localhost/addressbook/index.php");
 
         groupHelper = new GroupHelper(wd);
+        contactHelper = new ContactHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
 
@@ -39,5 +44,9 @@ public class ApplicationManager {
 
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
     }
 }
