@@ -14,7 +14,7 @@ public class ContactCreationTest extends TestBase {
                         "britva",
                         "Moscow street 0",
                         "89602671788",
-                        "555666"));
+                        "555666", "test1"), true);
         app.getContactHelper().submitContactCreation();
         app.getContactHelper().returnToContactPage();
     }

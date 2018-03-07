@@ -2,8 +2,9 @@ package ru.stqa.pft.addressbook.model;
 
 /**
  * Класс содержит информацию о контакте
- * @version 1.0.0
+ *
  * @author Evgeniy
+ * @version 1.0.0
  */
 public class ContactData {
     private String firstName;
@@ -12,13 +13,16 @@ public class ContactData {
 
     private String telephoneMobile;
     private String telephoneWork;
+    private String group;
 
-    public ContactData(String firstName, String lastName, String address, String telephoneMobile, String telephoneWork) {
+    public ContactData(String firstName, String lastName, String address,
+                       String telephoneMobile, String telephoneWork, String group) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.telephoneMobile = telephoneMobile;
         this.telephoneWork = telephoneWork;
+        this.group = group;
     }
 
     public String getFirstName() {
@@ -59,5 +63,13 @@ public class ContactData {
 
     public void setTelephoneWork(String telephoneWork) {
         this.telephoneWork = telephoneWork;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 }

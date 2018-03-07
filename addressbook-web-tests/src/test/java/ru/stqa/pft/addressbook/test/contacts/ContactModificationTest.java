@@ -6,7 +6,7 @@ import ru.stqa.pft.addressbook.test.TestBase;
 
 public class ContactModificationTest extends TestBase {
     @Test
-    public void testContactModification(){
+    public void testContactModification() {
         app.getNavigationHelper().gotoContactPage();
         app.getContactHelper().initContactModification();
         app.getContactHelper().fillContactForm(
@@ -14,7 +14,7 @@ public class ContactModificationTest extends TestBase {
                         "britva_modify",
                         "Moscow street modify",
                         "80000008",
-                        "000000"));
+                        "000000", null), false);
         app.getContactHelper().submitContactModification();
         app.getContactHelper().returnToContactPage();
     }
