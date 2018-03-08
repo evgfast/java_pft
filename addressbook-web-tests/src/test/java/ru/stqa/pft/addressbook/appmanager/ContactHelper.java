@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -28,7 +29,13 @@ public class ContactHelper extends HelperBase{
         type(By.name("work"), contactData.getTelephoneWork());
 
         if(creation){
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            WebElement selectElement = wd.findElement(By.name("new_group"));
+            Select listBox = new Select(selectElement);
+            int size_listbox = listBox.getOptions().size();
+            System.out.println("size listbox: " + size_listbox);
+            if(size_listbox > 1) {
+                listBox.selectByVisibleText(contactData.getGroup());
+            }
         } else{
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -53,5 +60,16 @@ public class ContactHelper extends HelperBase{
 
     public void submitContactModification() {
         click(By.name("update"));
+    }
+
+    public void createContact(ContactData contactData, boolean creation) {
+        initContactCreation();
+        fillContactForm(contactData, creation);
+        submitContactCreation();
+        returnToContactPage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.cssSelector("img[title=\"Edit\"]"));
     }
 }
