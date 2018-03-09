@@ -73,13 +73,13 @@ public class ContactHelper extends HelperBase {
         returnToContactPage();
     }
 
-    public void deleteContact(int index) {
+    public void delete(int index) {
         selectContact(index);
         deleteSelectContact();
         returnToContactPage();
     }
 
-    public void modifyGroup(ContactData contact, int index) {
+    public void modify(ContactData contact, int index) {
         initContactModification(index);
         fillContactForm(contact, false);
         submitContactModification();
@@ -90,7 +90,7 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.cssSelector("img[title=\"Edit\"]"));
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.xpath("//tr[@name=\"entry\"]"));
         for (WebElement element : elements) {
@@ -99,8 +99,10 @@ public class ContactHelper extends HelperBase {
             String address = element.findElement(By.xpath("td[4]")).getText();
             String allEmail = element.findElement(By.xpath("td[5]")).getText();
             String allPhone = element.findElement(By.xpath("td[6]")).getText();
-            ContactData contact = new ContactData(firstname, lastname, address, null,
-                    null, null);
+            ContactData contact = new ContactData().withFirstName(firstname)
+                    .withLastName(lastname)
+                    .withAddress(address);
+
             contacts.add(contact);
         }
         return contacts;
