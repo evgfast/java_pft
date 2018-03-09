@@ -21,13 +21,10 @@ public class ApplicationManager {
     private String browserType;
 
     public ApplicationManager(String browserType) {
-
         this.browserType = browserType;
     }
 
-
     public void init() {
-
         if (this.browserType.equals(BrowserType.FIREFOX)) {
             System.setProperty("webdriver.gecko.driver", "/home/evg/browser/geckodriver");
             wd = new FirefoxDriver();
