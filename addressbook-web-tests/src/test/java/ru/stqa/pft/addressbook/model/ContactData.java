@@ -9,6 +9,7 @@ import java.util.Objects;
  * @version 1.0.0
  */
 public class ContactData {
+    private int id = Integer.MAX_VALUE;
     private String firstName;
     private String lastName;
     private String address;
@@ -41,6 +42,9 @@ public class ContactData {
         return group;
     }
 
+    public int getId() {
+        return id;
+    }
 
     //
     public ContactData withFirstName(String firstName) {
@@ -73,15 +77,20 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "ContactData{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", telephoneMobile='" + telephoneMobile + '\'' +
                 ", telephoneWork='" + telephoneWork + '\'' +
-                ", group='" + group + '\'' +
                 '}';
     }
 
@@ -90,7 +99,8 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return Objects.equals(firstName, that.firstName) &&
+        return id == that.id &&
+                Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
                 Objects.equals(address, that.address);
     }
@@ -98,6 +108,6 @@ public class ContactData {
     @Override
     public int hashCode() {
 
-        return Objects.hash(firstName, lastName, address);
+        return Objects.hash(id, firstName, lastName, address);
     }
 }

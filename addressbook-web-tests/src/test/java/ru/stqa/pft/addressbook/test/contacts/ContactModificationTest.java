@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.test.TestBase;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTest extends TestBase {
 
@@ -25,20 +26,21 @@ public class ContactModificationTest extends TestBase {
 
     @Test
     public void testContactModification() {
+        Set<ContactData> before = app.contact().all();
+        ContactData modifyContact = before.iterator().next();
         ContactData contact = new ContactData()
+                .withId(modifyContact.getId())
                 .withFirstName("Boris_mod")
                 .withLastName("Britva_mod")
                 .withAddress("Moscow street mod")
                 .withTelephoneMobile("8000008")
                 .withTelephoneWork("555-000")
                 .withGroup("test1");
-        List<ContactData> before = app.contact().list();
-        int index = before.size() - 1;
-        app.contact().modify(contact, index);
-        List<ContactData> after = app.contact().list();
+        app.contact().modify(contact);
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size());
-        before.remove(index);
+        before.remove(modifyContact);
         before.add(contact);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        Assert.assertEquals(before, after);
     }
 }

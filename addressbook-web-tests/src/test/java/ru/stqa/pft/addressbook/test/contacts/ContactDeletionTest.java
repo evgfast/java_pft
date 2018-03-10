@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.test.TestBase;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactDeletionTest extends TestBase {
     @BeforeMethod
@@ -23,12 +24,12 @@ public class ContactDeletionTest extends TestBase {
 
     @Test
     public void testGroupDeletion() {
-        List<ContactData> before = app.contact().list();
-        int index = before.size() - 1;
-        app.contact().delete(index);
-        List<ContactData> after = app.contact().list();
-        Assert.assertEquals(after.size(), index);
-        before.remove(index);
+        Set<ContactData> before = app.contact().all();
+        ContactData delContact = before.iterator().next();
+        app.contact().delete(delContact);
+        Set<ContactData> after = app.contact().all();
+        Assert.assertEquals(after.size(), before.size() -1);
+        before.remove(delContact);
         Assert.assertEquals(before, after);
     }
 }
