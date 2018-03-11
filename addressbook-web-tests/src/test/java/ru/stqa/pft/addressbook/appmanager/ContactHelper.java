@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -128,7 +129,7 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    public Set<ContactData> all() {
+    public Set<ContactData> allSet() {
         Set<ContactData> contacts = new HashSet<>();
         List<WebElement> elements = wd.findElements(By.xpath("//tr[@name=\"entry\"]"));
         for (WebElement element : elements) {
@@ -139,6 +140,26 @@ public class ContactHelper extends HelperBase {
             String allEmail = element.findElement(By.xpath("td[5]")).getText();
             String allPhone = element.findElement(By.xpath("td[6]")).getText();
 
+
+            contacts.add(new ContactData().withId(id).
+                    withFirstName(firstname)
+                    .withLastName(lastname)
+                    .withAddress(address));
+        }
+        return contacts;
+    }
+
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
+        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name=\"entry\"]"));
+        for (WebElement element : elements) {
+            int id = Integer.parseInt(element.findElement(By.xpath("td[1]/input[@name=\"selected[]\"]")).getAttribute("id"));
+            String lastname = element.findElement(By.xpath("td[2]")).getText();
+            String firstname = element.findElement(By.xpath("td[3]")).getText();
+            String address = element.findElement(By.xpath("td[4]")).getText();
+            String allEmail = element.findElement(By.xpath("td[5]")).getText();
+            String allPhone = element.findElement(By.xpath("td[6]")).getText();
 
             contacts.add(new ContactData().withId(id).
                     withFirstName(firstname)
